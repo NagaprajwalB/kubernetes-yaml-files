@@ -1,0 +1,8 @@
+# ExternalName — DNS CNAME alias to an external service, no proxying
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-db
+spec:
+  type: ExternalName
+  externalName: mydb.us-east-1.rds.amazonaws.com

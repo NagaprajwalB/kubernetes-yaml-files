@@ -1,0 +1,14 @@
+# LoadBalancer — provisions an external cloud load balancer (AWS ELB/NLB, GCP LB, Azure LB)
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-lb
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+spec:
+  type: LoadBalancer
+  selector:
+    app: web
+  ports:
+    - port: 443
+      targetPort: 8443
