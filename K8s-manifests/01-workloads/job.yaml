@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration
+spec:
+  backoffLimit: 3
+  activeDeadlineSeconds: 600
+  template:
+    spec:
+      containers:
+        - name: migrate
+          image: myrepo/migrator:1.0
+          command: ["./migrate", "up"]
+      restartPolicy: OnFailure

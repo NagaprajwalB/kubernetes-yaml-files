@@ -1,0 +1,21 @@
+# Example: main app container + logging sidecar sharing a volume
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-sidecar
+spec:
+  containers:
+    - name: app
+      image: myrepo/web-app:1.4.2
+      volumeMounts:
+        - name: logs
+          mountPath: /var/log/app
+    - name: log-shipper
+      image: fluent/fluent-bit:2.2
+      volumeMounts:
+        - name: logs
+          mountPath: /var/log/app
+          readOnly: true
+  volumes:
+    - name: logs
+      emptyDir: {}

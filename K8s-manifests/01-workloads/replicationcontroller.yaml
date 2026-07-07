@@ -1,0 +1,19 @@
+# ReplicationController (legacy — prefer ReplicaSet/Deployment instead)
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: web-rc
+spec:
+  replicas: 3
+  selector:
+    app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: app
+          image: myrepo/web-app:1.4.2
+          ports:
+            - containerPort: 8080
