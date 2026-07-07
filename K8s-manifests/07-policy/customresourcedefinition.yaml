@@ -1,0 +1,36 @@
+# Example CRD — defines a new "Website" resource type, then an instance of it
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: websites.example.com
+spec:
+  group: example.com
+  names:
+    kind: Website
+    plural: websites
+    singular: website
+    shortNames: ["ws"]
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                domain:
+                  type: string
+                replicas:
+                  type: integer
+---
+apiVersion: example.com/v1
+kind: Website
+metadata:
+  name: my-site
+spec:
+  domain: example.com
+  replicas: 3
