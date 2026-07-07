@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-app-config
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+  app.properties: |
+    max_connections=100
+    timeout_seconds=30
